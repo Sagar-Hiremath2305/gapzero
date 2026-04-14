@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+
+# Production Build
+dist/
+dist-ssr/
+*.local
+
+# Logs
+npm-debug.log*
+
+# Editor folders (VS Code / JetBrains)
+.vscode/
+.idea/
+
+# OS specific files
+.DS_Store
