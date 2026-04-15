@@ -21,7 +21,11 @@ const app=express();
 
 //Middlewares
 
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:5173', // Allow your Vite frontend specifically
+  methods: ['GET', 'POST'],
+  credentials: true
+}));
 app.use(express.json());
 
 const ConnectDB=async()=>{
@@ -63,6 +67,8 @@ app.post('/api/upload',upload.single('resume'),async(req,res)=>{
         if(!req.file){
             return res.status(400).json({error: "File didn't upload"})
         }
+        console.log("File saved at:", req.file.path);
+        
         const data=await pdf(req.file.path);
         const rawText=data.text;
         const jobDescription=req.body.jobDescription;
@@ -104,7 +110,7 @@ app.post('/api/upload',upload.single('resume'),async(req,res)=>{
     }
 })
 
-app.get('/api/analysis/:id',async(req,res)=>{   
+app.get('/api/results/:id',async(req,res)=>{   
     try{
         const analysis=await Analysis.findById(req.params.id).populate('resumeId');
         if(!analysis){
