@@ -1,7 +1,26 @@
-import { Link } from "react-router-dom";
+import { Link ,useParams} from "react-router-dom";
 import './results.css';
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Results = () => {
+  const {id}=useParams();
+  const [data,setData]=useState(null);
+
+  useEffect(()=>{
+    axios.get('http://localhost:5000/api/results/${id}')
+    .then(res=>setData(res.data))
+    .catch(err=>console.error("Error fetching analysis:",err))
+  },[id])
+
+  if(!data){
+    return (
+      <div className="results-bg flex items-center justify-center">
+        <p>Loading analysis results...</p>
+      </div>
+    );
+  }
+
   return (
     <div className="results-bg">
       <nav className="flex justify-between items-center py-4 px-10 bg-white shadow-sm">

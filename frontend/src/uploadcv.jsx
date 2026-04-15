@@ -4,13 +4,30 @@ import './upload.css';
 const UploadCV = () => {
   const navigate = useNavigate(); // 2. Initialize the "GPS"
 
-  const handleAnalyze = () => {
+  const handleAnalyze = async () => {
     // 3. This function runs when the button is clicked
     console.log("Analyzing...");
     
-    // For now, we redirect immediately. 
-    // Later, you can add a loading spinner here!
-    navigate('/results'); 
+    const handleSubmit=async(e)=>{
+      e.preventDefault();
+    }
+
+    const formdata=new FormData();
+    formdata.append('resume',file);
+    formdata.append('jobDescription',jobDescription);
+
+    try{
+      const response=await axios.post('http://localhost:5000/api/upload',formdata,{
+        headers:{'Content-Type':'multipart/form-data'}
+      });
+
+      navigate('/results/${response.data.analysisId}'); 
+    }
+  
+    catch(error){
+      console.error("Error during analysis:",error);
+      alert("Analysis failed. Please try again.");
+    } 
   };
 
   return (

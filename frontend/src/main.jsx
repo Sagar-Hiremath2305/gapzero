@@ -11,7 +11,7 @@ import Login from './login.jsx'
 import Register from './register.jsx'
 import Profile from './profile.jsx'
 import UploadCV from './uploadcv.jsx'
-import Results from './results.jsx' // This is the line Vite was complaining about!
+import Results from './results.jsx' 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -23,6 +23,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/profile" element={<Profile />} />
         <Route path="/upload" element={<UploadCV />} />
         <Route path="/results" element={<Results />} />
+        <Route path="/results/:id" element={<Results />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

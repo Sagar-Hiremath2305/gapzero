@@ -1,8 +1,8 @@
 const mongoose=require('mongoose');
 
 const ResumeSchema=new mongoose.Schema({
-    username:{type:String,required:True},
-    filename:{type:String,required:True},
+    username:{type:String,required:true},
+    filename:{type:String,required:true},
     rawText:String,
     jobDescription:String,
     matchScore: Number,
@@ -10,3 +10,4 @@ const ResumeSchema=new mongoose.Schema({
     beneficialGaps: [String],
     createdAt: { type: Date, default: Date.now }
 })
+
